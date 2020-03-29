@@ -27,18 +27,12 @@ static void createTable() {
         qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
     }
 
-    query.exec("INSERT INTO Conversations VALUES('Me', 'Medicines Order', '2016-01-07T14:36:06',"
-               "'Can I order this?')");
     query.exec("INSERT INTO Conversations VALUES('Medicines Order', 'Me', '2016-01-07T14:36:16',"
-               "'Sure, choose quantity.')");
-    query.exec("INSERT INTO Conversations VALUES('Me', 'Guess your diasease', '2016-01-01T11:24:53',"
-               "'I have some symptoms.')");
+               "'Hello. You can order medicines here.')");
     query.exec("INSERT INTO Conversations VALUES('Guess your diasease', 'Me', '2016-01-07T14:36:16',"
-               "'Tell me more, i`ll try to help you.')");
-    query.exec("INSERT INTO Conversations VALUES('Me', 'Live Consultation with Doctor', '2015-11-20T06:30:02',"
-               "'Hello, I want to tell you something.')");
+               "'Hello. Tell me your symptoms and I`ll try to guess your diasease.')");
     query.exec("INSERT INTO Conversations VALUES('Live Consultation with Doctor', 'Me', '2015-11-20T08:21:03',"
-               "'Hello, what happened? It seems you have troubles?')");
+               "'Hello. Tell me about your troubles and I`ll try to help you with them.')");
 }
 
 SqlConversationModel::SqlConversationModel(QObject *parent) : QSqlTableModel(parent) {
