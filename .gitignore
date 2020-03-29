@@ -2,4 +2,6 @@
 /.qmake.stash
 /ChatBot
 /resources/private/
-
+/moc_*
+/qrc_qml.cpp
+/*.o
