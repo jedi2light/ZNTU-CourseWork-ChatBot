@@ -78,11 +78,6 @@ QHash<int, QByteArray> SqlConversationModel::roleNames() const {
     return names;
 }
 
-QString retrieveAppropriateAnswer(const QString &recipient, const QString &message) {
-    qDebug() << "Recipient: " << recipient << "Message: " << message;
-    return message;
-}
-
 void SqlConversationModel::sendMessage(const QString &recipient, const QString &message) {
     AnswerManager answerManager = AnswerManager(recipient, message);
 
