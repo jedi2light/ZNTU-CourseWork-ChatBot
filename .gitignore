@@ -5,3 +5,4 @@
 /moc_*
 /qrc_qml.cpp
 /*.o
+/**.autosave
