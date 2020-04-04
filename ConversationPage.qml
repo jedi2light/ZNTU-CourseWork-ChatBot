@@ -8,8 +8,9 @@ Page {
     id: root
 
     property string inConversationWith
+    property string conversationIconName
 
-    header: ChatToolBar {
+    header: ToolBar {
         ToolButton {
             text: qsTr("Back")
             anchors.left: parent.left
@@ -53,8 +54,11 @@ Page {
                     anchors.right: sentByMe ? parent.right : undefined
 
                     Image {
+                        onSourceChanged: {
+                            conversationIconName = model.icon
+                        }
                         id: avatar
-                        source: !sentByMe ? "qrc:/resources/public/png/" + model.author.replace(/ /g, "_") + ".png" : ""
+                        source: !sentByMe ? "qrc:/resources/public/png/" + model.icon : ""
                     }
 
                     Rectangle {
@@ -103,7 +107,7 @@ Page {
                     text: qsTr("Send")
                     enabled: messageField.length > 0
                     onClicked: {
-                        listView.model.sendMessage(inConversationWith, messageField.text);
+                        listView.model.sendMessage(inConversationWith, messageField.text, conversationIconName);
                         messageField.text = "";
                     }
                 }
@@ -111,4 +115,3 @@ Page {
         }
     }
 }
-

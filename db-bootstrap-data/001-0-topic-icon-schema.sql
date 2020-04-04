@@ -1,0 +1,7 @@
+--- Topic Icon Schema ---
+
+CREATE TABLE IF NOT EXISTS 'TopicIcon' (
+    'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    'icon' VARCHAR NOT NULL
+);
+

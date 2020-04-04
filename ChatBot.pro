@@ -13,15 +13,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-HEADERS += sqlcontactmodel.h \
+HEADERS += \
            answermanager.h \
-           sqlconversationmodel.h
+           sqlconversationmodel.h \
+           sqltopicmodel.h
 
 SOURCES += \
         answermanager.cpp \
         main.cpp \
-        sqlcontactmodel.cpp \
-        sqlconversationmodel.cpp
+        sqlconversationmodel.cpp \
+        sqltopicmodel.cpp
 
 RESOURCES += qml.qrc
 

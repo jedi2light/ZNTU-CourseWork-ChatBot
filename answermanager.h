@@ -5,8 +5,10 @@
 
 class AnswerManager {
 public:
-    AnswerManager(QString recipient, QString message);
+    AnswerManager();
     QString appropriateMessage();
+    void setRecipient(QString recipient);
+    void setMessage(QString message);
 private:
     QString whenMedicinesOrder();
     QString whenGuessYourDiasease();

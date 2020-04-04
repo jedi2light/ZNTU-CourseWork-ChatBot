@@ -1,7 +1,17 @@
+#include <QDebug>
+
 #include "answermanager.h"
 
-AnswerManager::AnswerManager(QString recipient, QString message) {
+AnswerManager::AnswerManager() {
+    this->recipient = "";
+    this->message = "";
+}
+
+void AnswerManager::setRecipient(QString recipient) {
     this->recipient = recipient;
+}
+
+void AnswerManager::setMessage(QString message) {
     this->message = message;
 }
 

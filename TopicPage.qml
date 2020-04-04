@@ -6,7 +6,7 @@ import ChatBot 1.0
 Page {
     id: root
 
-    header: ChatToolBar {
+    header: ToolBar {
         Label {
             text: qsTr("Topics")
             font.pixelSize: 20
@@ -22,19 +22,18 @@ Page {
         bottomMargin: 48
         rightMargin: 48
         spacing: 20
-        model: SqlContactModel {}
+        model: SqlTopicModel {}
         delegate: ItemDelegate {
-            text: model.display
+            text: model.name
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.implicitHeight
             leftPadding: avatar.implicitWidth + 32
-            onClicked: root.StackView.view.push("qrc:/ConversationPage.qml", { inConversationWith: model.display })
+            onClicked: root.StackView.view.push("qrc:/ConversationPage.qml", { inConversationWith: model.name })
 
             Image {
                 id: avatar
-                source: "qrc:/resources/public/png/" + model.display.replace(/ /g, "_") + ".png"
+                source: "qrc:/resources/public/png/" + model.icon
             }
         }
     }
 }
-

@@ -1,60 +1,31 @@
-#include "sqlconversationmodel.h"
-
 #include <QDateTime>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QSqlQuery>
 
-static const char *conversationsTableName = "Conversations";
+#include "sqlconversationmodel.h"
+#include "answermanager.h"
 
-static void createTable() {
-    if (QSqlDatabase::database().tables().contains(conversationsTableName)) {
-        // The table already exists; we don't need to do anything.
-        return;
-    }
-
-    QSqlQuery query;
-    if (!query.exec(
-        "CREATE TABLE IF NOT EXISTS 'Conversations' ("
-        "'author' TEXT NOT NULL,"
-        "'recipient' TEXT NOT NULL,"
-        "'timestamp' TEXT NOT NULL,"
-        "'message' TEXT NOT NULL,"
-        "FOREIGN KEY('author') REFERENCES Topics ( name ),"
-        "FOREIGN KEY('recipient') REFERENCES Topics ( name )"
-        ")")) {
-        qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
-    }
-
-    query.exec("INSERT INTO Conversations VALUES('Medicines Order', 'Me', '2016-01-07T14:36:16',"
-               "'Hello. You can order medicines here.')");
-    query.exec("INSERT INTO Conversations VALUES('Guess your diasease', 'Me', '2016-01-07T14:36:16',"
-               "'Hello. Tell me your symptoms and I`ll try to guess your diasease.')");
-    query.exec("INSERT INTO Conversations VALUES('Live Consultation with Doctor', 'Me', '2015-11-20T08:21:03',"
-               "'Hello. Tell me about your troubles and I`ll try to help you with them.')");
-}
-
-SqlConversationModel::SqlConversationModel(QObject *parent) : QSqlTableModel(parent) {
-    createTable();
-    setTable(conversationsTableName);
-    setSort(2, Qt::DescendingOrder);
-    // Ensures that the model is sorted correctly after submitting a new row.
+SqlConversationModel::SqlConversationModel(QObject *parent) : QSqlRelationalTableModel(parent) {
+    setTable("Conversations");
+    setSort(0, Qt::DescendingOrder);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
+    setRelation(5, QSqlRelation("TopicIcon", "id", "icon"));
 }
 
-QString SqlConversationModel::recipient() const {
-    return m_recipient;
+QString SqlConversationModel::getRecipient() const {
+    return this->recipient;
 }
 
 void SqlConversationModel::setRecipient(const QString &recipient) {
-    if (recipient == m_recipient)
+    if (this->recipient == recipient)
         return;
 
-    m_recipient = recipient;
+    this->recipient = recipient;
 
     const QString filterString = QString::fromLatin1(
-        "(recipient = '%1' AND author = 'Me') OR (recipient = 'Me' AND author='%1')").arg(m_recipient);
+        "(recipient = '%1' AND author = 'Me') OR (recipient = 'Me' AND author='%1')").arg(this->recipient);
     setFilter(filterString);
     select();
 
@@ -71,33 +42,54 @@ QVariant SqlConversationModel::data(const QModelIndex &index, int role) const {
 
 QHash<int, QByteArray> SqlConversationModel::roleNames() const {
     QHash<int, QByteArray> names;
-    names[Qt::UserRole] = "author";
-    names[Qt::UserRole + 1] = "recipient";
-    names[Qt::UserRole + 2] = "timestamp";
-    names[Qt::UserRole + 3] = "message";
+    names[Qt::UserRole] = "id";
+    names[Qt::UserRole + 1] = "author";
+    names[Qt::UserRole + 2] = "recipient";
+    names[Qt::UserRole + 3] = "timestamp";
+    names[Qt::UserRole + 4] = "message";
+    names[Qt::UserRole + 5] = "icon";
     return names;
 }
 
-void SqlConversationModel::sendMessage(const QString &recipient, const QString &message) {
-    AnswerManager answerManager = AnswerManager(recipient, message);
+static int getIconId(QString iconName) {
+    QSqlQuery query("SELECT id FROM TopicIcon WHERE icon = '" + iconName + "'");
+    query.exec();
+    query.first();
+    return query.value(0).toInt();
+}
 
-    QSqlRecord retrievedMessageRecord = record();
-    retrievedMessageRecord.setValue("author", recipient);
-    retrievedMessageRecord.setValue("recipient", "Me");
-    retrievedMessageRecord.setValue("timestamp", QDateTime::currentDateTime().toString(Qt::ISODate));
-    retrievedMessageRecord.setValue("message", answerManager.appropriateMessage());
-    if (!insertRecord(rowCount(), retrievedMessageRecord)) {
-        qWarning() << "ailed to register retrieved message:" << lastError().text();
-        return;
-    }
+void SqlConversationModel::sendMessage(const QString &recipient, const QString &message, const QString &iconName) {
+    // Set current recipient and message to AnswerManager object
+
+    answerManager.setRecipient(recipient);
+    answerManager.setMessage(message);
+
+    // Retrieve real icon id from TopicIcon because of QtSqlRelationTableModel behaivour
+    // So first we must call select() on related model, and then query().value("id")
+    // And provide it to new record then
+    // relationModel(5)->select();
 
     QSqlRecord sentMessageRecord = record();
     sentMessageRecord.setValue("author", "Me");
     sentMessageRecord.setValue("recipient", recipient);
     sentMessageRecord.setValue("timestamp", QDateTime::currentDateTime().toString(Qt::ISODate));
     sentMessageRecord.setValue("message", message);
+    sentMessageRecord.setValue("icon", getIconId(iconName));
+
     if (!insertRecord(rowCount(), sentMessageRecord)) {
         qWarning() << "Failed to register sent message: " << lastError().text();
+        return;
+    }
+
+    QSqlRecord retrievedMessageRecord = record();
+    retrievedMessageRecord.setValue("author", recipient);
+    retrievedMessageRecord.setValue("recipient", "Me");
+    retrievedMessageRecord.setValue("timestamp", QDateTime::currentDateTime().toString(Qt::ISODate));
+    retrievedMessageRecord.setValue("message", answerManager.appropriateMessage());
+    retrievedMessageRecord.setValue("icon", getIconId(iconName));
+
+    if (!insertRecord(rowCount(), retrievedMessageRecord)) {
+        qWarning() << "Failed to register retrieved message:" << lastError().text();
         return;
     }
 

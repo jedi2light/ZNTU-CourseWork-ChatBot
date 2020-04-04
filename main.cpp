@@ -4,7 +4,7 @@
 #include <QSqlError>
 #include <QtQml>
 
-#include "sqlcontactmodel.h"
+#include "sqltopicmodel.h"
 #include "sqlconversationmodel.h"
 
 static void connectToDatabase() {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<SqlContactModel>("ChatBot", 1, 0, "SqlContactModel");
+    qmlRegisterType<SqlTopicModel>("ChatBot", 1, 0, "SqlTopicModel");
     qmlRegisterType<SqlConversationModel>("ChatBot", 1, 0, "SqlConversationModel");
 
     connectToDatabase();
@@ -45,4 +45,3 @@ int main(int argc, char *argv[]) {
 
     return app.exec();
 }
-

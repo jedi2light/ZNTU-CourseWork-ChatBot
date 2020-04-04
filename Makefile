@@ -54,13 +54,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = answermanager.cpp \
 		main.cpp \
-		sqlcontactmodel.cpp \
-		sqlconversationmodel.cpp qrc_qml.cpp \
+		sqlconversationmodel.cpp \
+		sqltopicmodel.cpp qrc_qml.cpp \
 		moc_sqlconversationmodel.cpp
 OBJECTS       = answermanager.o \
 		main.o \
-		sqlcontactmodel.o \
 		sqlconversationmodel.o \
+		sqltopicmodel.o \
 		qrc_qml.o \
 		moc_sqlconversationmodel.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -362,12 +362,12 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		ChatBot.pro sqlcontactmodel.h \
-		answermanager.h \
-		sqlconversationmodel.h answermanager.cpp \
+		ChatBot.pro answermanager.h \
+		sqlconversationmodel.h \
+		sqltopicmodel.h answermanager.cpp \
 		main.cpp \
-		sqlcontactmodel.cpp \
-		sqlconversationmodel.cpp
+		sqlconversationmodel.cpp \
+		sqltopicmodel.cpp
 QMAKE_TARGET  = ChatBot
 DESTDIR       = 
 TARGET        = ChatBot
@@ -998,8 +998,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents sqlcontactmodel.h answermanager.h sqlconversationmodel.h $(DISTDIR)/
-	$(COPY_FILE) --parents answermanager.cpp main.cpp sqlcontactmodel.cpp sqlconversationmodel.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents answermanager.h sqlconversationmodel.h sqltopicmodel.h $(DISTDIR)/
+	$(COPY_FILE) --parents answermanager.cpp main.cpp sqlconversationmodel.cpp sqltopicmodel.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1028,14 +1028,12 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
 		/usr/bin/rcc \
-		ChatToolBar.qml \
 		ConversationPage.qml \
-		ContactPage.qml \
-		qtquickcontrols2.conf \
+		TopicPage.qml \
 		main.qml \
-		resources/public/png/Medicines_Order.png \
-		resources/public/png/Guess_your_diasease.png \
-		resources/public/png/Live_Consultation_with_Doctor.png
+		resources/public/png/doctor.png \
+		resources/public/png/medicines.png \
+		resources/public/png/diasease.png
 	/usr/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -1070,17 +1068,17 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 answermanager.o: answermanager.cpp answermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o answermanager.o answermanager.cpp
 
-main.o: main.cpp sqlcontactmodel.h \
+main.o: main.cpp sqltopicmodel.h \
 		sqlconversationmodel.h \
 		answermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-sqlcontactmodel.o: sqlcontactmodel.cpp sqlcontactmodel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqlcontactmodel.o sqlcontactmodel.cpp
-
 sqlconversationmodel.o: sqlconversationmodel.cpp sqlconversationmodel.h \
 		answermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqlconversationmodel.o sqlconversationmodel.cpp
+
+sqltopicmodel.o: sqltopicmodel.cpp sqltopicmodel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqltopicmodel.o sqltopicmodel.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
