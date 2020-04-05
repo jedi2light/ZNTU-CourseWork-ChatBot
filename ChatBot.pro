@@ -15,12 +15,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
            answermanager.h \
+           diaseaseprocessor.h \
+           doctorprocessor.h \
+           medicinesorderprocessor.h \
            sqlconversationmodel.h \
            sqltopicmodel.h
 
 SOURCES += \
         answermanager.cpp \
+        diaseaseprocessor.cpp \
+        doctorprocessor.cpp \
         main.cpp \
+        medicinesorderprocessor.cpp \
         sqlconversationmodel.cpp \
         sqltopicmodel.cpp
 

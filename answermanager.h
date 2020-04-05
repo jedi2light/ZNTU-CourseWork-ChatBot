@@ -3,6 +3,10 @@
 
 #include <QString>
 
+#include "medicinesorderprocessor.h"
+#include "diaseaseprocessor.h"
+#include "doctorprocessor.h"
+
 class AnswerManager {
 public:
     AnswerManager();
@@ -15,6 +19,9 @@ private:
     QString whenLiveConsultationWithDoctor();
     QString recipient;
     QString message;
+    MedicinesOrderProcessor mrProcessor;
+    DiaseaseProcessor diProcessr;
+    DoctorProcessor drProcessor;
 };
 
 #endif // ANSWERMANAGER_H

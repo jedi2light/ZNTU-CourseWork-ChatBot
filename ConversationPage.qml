@@ -100,6 +100,12 @@ Page {
                     Layout.fillWidth: true
                     placeholderText: qsTr("Compose message")
                     wrapMode: TextArea.Wrap
+                    Keys.onPressed: {
+                        if (event.key === Qt.Key_Enter) {
+                            listView.model.sendMessage(inConversationWith, messageField.text, conversationIconName);
+                            messageField.text = "";
+                        }
+                    }
                 }
 
                 Button {

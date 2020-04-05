@@ -53,12 +53,18 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = answermanager.cpp \
+		diaseaseprocessor.cpp \
+		doctorprocessor.cpp \
 		main.cpp \
+		medicinesorderprocessor.cpp \
 		sqlconversationmodel.cpp \
 		sqltopicmodel.cpp qrc_qml.cpp \
 		moc_sqlconversationmodel.cpp
 OBJECTS       = answermanager.o \
+		diaseaseprocessor.o \
+		doctorprocessor.o \
 		main.o \
+		medicinesorderprocessor.o \
 		sqlconversationmodel.o \
 		sqltopicmodel.o \
 		qrc_qml.o \
@@ -363,9 +369,15 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		ChatBot.pro answermanager.h \
+		diaseaseprocessor.h \
+		doctorprocessor.h \
+		medicinesorderprocessor.h \
 		sqlconversationmodel.h \
 		sqltopicmodel.h answermanager.cpp \
+		diaseaseprocessor.cpp \
+		doctorprocessor.cpp \
 		main.cpp \
+		medicinesorderprocessor.cpp \
 		sqlconversationmodel.cpp \
 		sqltopicmodel.cpp
 QMAKE_TARGET  = ChatBot
@@ -998,8 +1010,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents answermanager.h sqlconversationmodel.h sqltopicmodel.h $(DISTDIR)/
-	$(COPY_FILE) --parents answermanager.cpp main.cpp sqlconversationmodel.cpp sqltopicmodel.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents answermanager.h diaseaseprocessor.h doctorprocessor.h medicinesorderprocessor.h sqlconversationmodel.h sqltopicmodel.h $(DISTDIR)/
+	$(COPY_FILE) --parents answermanager.cpp diaseaseprocessor.cpp doctorprocessor.cpp main.cpp medicinesorderprocessor.cpp sqlconversationmodel.cpp sqltopicmodel.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1068,10 +1080,19 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 answermanager.o: answermanager.cpp answermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o answermanager.o answermanager.cpp
 
+diaseaseprocessor.o: diaseaseprocessor.cpp diaseaseprocessor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o diaseaseprocessor.o diaseaseprocessor.cpp
+
+doctorprocessor.o: doctorprocessor.cpp doctorprocessor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doctorprocessor.o doctorprocessor.cpp
+
 main.o: main.cpp sqltopicmodel.h \
 		sqlconversationmodel.h \
 		answermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+medicinesorderprocessor.o: medicinesorderprocessor.cpp medicinesorderprocessor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o medicinesorderprocessor.o medicinesorderprocessor.cpp
 
 sqlconversationmodel.o: sqlconversationmodel.cpp sqlconversationmodel.h \
 		answermanager.h

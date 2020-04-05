@@ -16,21 +16,20 @@ void AnswerManager::setMessage(QString message) {
 }
 
 QString AnswerManager::whenMedicinesOrder() {
-    if (this->message == "test-one")
-        return "You just activated my secret card! Medicines!";
-    return "Yes, take these masks already!";
+    mrProcessor.setSourceMessage(this->message);
+    return mrProcessor.getProcessedMessage();
 }
 
 QString AnswerManager::whenGuessYourDiasease() {
-    if (this->message == "test-one")
-        return "You just activated my secret card! Diasease!";
-    return "I think you`ve got COVID-19";
+    // diProcessor.setSourceMessage(this->message);
+    // return diProcessor.getProcessedMessage();
+    return "I will be smart diasease guesser";
 }
 
 QString AnswerManager::whenLiveConsultationWithDoctor() {
-    if (this->message == "test-one")
-        return "You just activated my secret card! Doctor!";
-    return "Please stay at home! And do not forget to wash your hands.";
+    // drProcessor.setSourceMessage(this->message);
+    // return processor.getProcessedMessage();
+    return "I will be smart doctor";
 }
 
 QString AnswerManager::appropriateMessage() {
