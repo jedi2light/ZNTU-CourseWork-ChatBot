@@ -22,10 +22,10 @@ QString MedicinesOrderProcessor::getProcessedMessage() {
     if(!retrieveStage()) return "Sorry, an error occured in my core "
                                 "and I can not remember point where we stopped at.";
     processMessage();
-    if (!isValidForStage()) return "Sorry, I do not understand you know. What you are talking about?";
+    if (!isValidForStage()) return "Sorry, I do not understand you.";
     else {
         if(!isFinalStage()) {
-            if(!updateStage()) return "Sorry, an error occured in my core and we can not go ahead.";
+            if(!updateStage()) return "Sorry, an error occured in my core and we can not proceed.";
         } else if (!resetStage()) return "Sorry, an error occured in my core and we can not begin from scratch.";
         return this->processedMesage;
     }
@@ -93,12 +93,10 @@ bool MedicinesOrderProcessor::containsKeyWords(QStringList keywords) {
 void MedicinesOrderProcessor::processMessage() {
     if(isMatchingInitInput() && currentStage("S_INIT")) {
         // On S_INIT stage ...
-        setResult(true, "Ok! Now tell me about first item.\n"
+        setResult(true, "Ok, please send me name of first medicament.\n"
                         "As example: Medicine Name Amount[P].\n"
-                        "Please be careful, but don`t worry, "
-                        "on each time I will give you a chance "
-                        "to correct your mistake, so let`s begin.\n"
-                        "Oh... When you finish, just let me know, right?", "S_ADDING");
+                        "You can edit your requests on any stage if needed.\n"
+                        "When you'll going to finish, just let me know :)", "S_ADDING");
         return;
     } else if(!isMatchingAddingFinishedInput() && currentStage("S_ADDING")) {
         // Store current user input because we will use it on the next stage
