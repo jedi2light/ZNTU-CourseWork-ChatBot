@@ -17,13 +17,12 @@ void AnswerManager::setMessage(QString message) {
 
 QString AnswerManager::whenMedicinesOrder() {
     mrProcessor.setSourceMessage(this->message);
-    return mrProcessor.getProcessedMessage();
+    return mrProcessor.processAndGetProcessedMessage();
 }
 
 QString AnswerManager::whenGuessYourDiasease() {
-    // diProcessor.setSourceMessage(this->message);
-    // return diProcessor.getProcessedMessage();
-    return "I will be smart diasease guesser";
+    diProcessor.setSourceMessage(this->message);
+    return diProcessor.processAndGetProcessedMessage();
 }
 
 QString AnswerManager::whenLiveConsultationWithDoctor() {

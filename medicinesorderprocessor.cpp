@@ -18,7 +18,7 @@ void MedicinesOrderProcessor::setSourceMessage(QString message) {
     this->sourceMessage = message;
 }
 
-QString MedicinesOrderProcessor::getProcessedMessage() {
+QString MedicinesOrderProcessor::processAndGetProcessedMessage() {
     if(!retrieveStage()) return "Sorry, an error occured in my core "
                                 "and I can not remember point where we stopped at.";
     processMessage();

@@ -9,7 +9,7 @@ public:
     // Public API
     MedicinesOrderProcessor();
     void setSourceMessage(QString message);
-    QString getProcessedMessage();
+    QString processAndGetProcessedMessage();
 private:
     // Internal API and related fields
     QString previousSourceMessage;

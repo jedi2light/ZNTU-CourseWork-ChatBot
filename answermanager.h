@@ -20,7 +20,7 @@ private:
     QString recipient;
     QString message;
     MedicinesOrderProcessor mrProcessor;
-    DiaseaseProcessor diProcessr;
+    DiaseaseProcessor diProcessor;
     DoctorProcessor drProcessor;
 };
 
