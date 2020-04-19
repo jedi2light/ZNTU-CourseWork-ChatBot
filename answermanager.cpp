@@ -26,9 +26,8 @@ QString AnswerManager::whenGuessYourDiasease() {
 }
 
 QString AnswerManager::whenLiveConsultationWithDoctor() {
-    // drProcessor.setSourceMessage(this->message);
-    // return processor.getProcessedMessage();
-    return "I will be smart doctor";
+    drProcessor.setSourceMessage(this->message);
+    return drProcessor.processAndGetProcessedMessage();
 }
 
 QString AnswerManager::appropriateMessage() {
