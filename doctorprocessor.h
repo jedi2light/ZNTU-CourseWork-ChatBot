@@ -1,10 +1,8 @@
 #ifndef DOCTORPROCESSOR_H
 #define DOCTORPROCESSOR_H
 
-#include <QHash>
 #include <QString>
 #include <QStringList>
-#include <QRandomGenerator>
 
 class DoctorProcessor {
 public:
