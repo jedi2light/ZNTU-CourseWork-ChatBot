@@ -11,6 +11,9 @@ $ bash db-bootstrap.sh
 $ qmake && make && ./ChatBot
 ```
 
+# Deployment on Microsoft Windows (7, 8, 10)
+1. Place prebootstrapped DB located at `./chat-database.sqlite3` into `%APPDATA%\ChatBot`. If directory does not exist, you nedd to create it.
+
 # Layout
 * Documentation located at `Doc/` directory
 * Presentation located at `Assets/Presentation/` directory
