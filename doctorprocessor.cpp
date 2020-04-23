@@ -32,10 +32,9 @@ QStringList DoctorProcessor::retrieveAnswerList(QString keyword) {
 }
 
 QString DoctorProcessor::processAndGetProcessedMessage() {
-    QRegularExpression re("(?P<before>.*)(?P<key>[Hh]ello|I want|[Ii]f|[Nn]o|I was|I feel|I felt|[Bb]ye)(?P<after>.*)");
+    QRegularExpression re("(?P<before>.*)(?P<key>[Hh]ello|I want|[Ii]f|[Nn]o|I was|I feel|I felt|[Bb]ye|[Mm]y name|[Hh]ate)(?P<after>.*)");
     QRegularExpressionMatch match = re.match(this->sourceMessage);
     if (!match.captured("key").isEmpty() || !match.captured("after").isEmpty()) {
-//        QStringList answerList = dictionary[match.captured("key").toLower()];
         QStringList answerList = retrieveAnswerList(match.captured("key").toLower());
         QString answer = answerList.at(qrand() % answerList.size());
         return answer.arg(withConvertedViewpoint(match.captured("after")));
@@ -50,5 +49,7 @@ QString DoctorProcessor::withConvertedViewpoint(QString string) {
             .replace("me", "you")
             .replace("am", "are")
             .replace("was", "were")
-            .replace("were", "was");
+            .replace("were", "was")
+            .replace("my", "your")
+            .replace("is", "");
 }

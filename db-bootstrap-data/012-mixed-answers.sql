@@ -8,12 +8,12 @@ CREATE TABLE IF NOT EXISTS 'Answers' (
 );
 
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('How do you do. Please state your problem.', 1);
-INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('What would it mean if you got %1"', 2);
-INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why do you want %1', 2);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('What would it mean if you got %1?', 2);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why do you want %1?', 2);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Suppose you got %1 soon"', 2);
-INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Do you really think its likely that %1', 3);
-INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Do you wish that %1', 3);
-INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('What do you think about %1', 3);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Do you really think its likely that %1?', 3);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Do you wish that %1?', 3);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('What do you think about %1?', 3);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Really-- if %1', 3);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why not?', 4);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('You are being a bit negative', 4);
@@ -23,4 +23,10 @@ INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Perhaps I already knew yo
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why do you tell me you were %1 now?', 5);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Do you often feel %1?', 6);
 INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('What other feelings do you have?', 7);
-
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Ok, see you later.', 8);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Ok, see you next time.', 8);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Ok, I`ll be waiting.', 8);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Ok, I will call you %1.', 9);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Ok, such a good name, %1!', 9);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why do %1?', 10);
+INSERT INTO 'Answers' ('phrase', 'keyword_id') VALUES('Why so?', 10);
