@@ -35,7 +35,7 @@ Let`s __start__!
 I`ve got __sick__...
 ```
 2. Next you have to send a symptom:
-Please look to the file [db-bootstrap-data/009-mixed-diaseases-symptoms.sql](db-bootstrap-data/009-mixed-diaseases-symptoms.sql) for supported symptoms
+Please take a look at [db-bootstrap-data/009-mixed-diaseases-symptoms.sql](db-bootstrap-data/009-mixed-diaseases-symptoms.sql) for supported symptoms
 3. When you finish, you have to send one of the next phrases:
 ```
 I have __done__.
