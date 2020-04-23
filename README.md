@@ -22,6 +22,6 @@ Take a look at [Sample Usage](SAMPLE_USAGE.md).
 * Presentation located at `Assets/Presentation/` directory
 
 # Demo
-Go through this link: https://youtube.com/...
+Go through this link: https://youtu.be/R-HvUBbMWQ4
 
 # TODO: fill with other improtant information ...
