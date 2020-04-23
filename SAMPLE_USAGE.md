@@ -1,11 +1,11 @@
 # Sample Usage
 
-# Medicines Usage
+# Medicines Order
 1. First you have to start a dialog with one of the following phrases:
 ```
 __Hello__!
 Let`s __start__!
-I __want__ to __orders__ some medicines.
+I __want__ to __order__ some medicines.
 ```
 2. Next you have to send a medicine in this format:
 ```
@@ -35,7 +35,7 @@ Let`s __start__!
 I`ve got __sick__...
 ```
 2. Next you have to send a symptom:
-Please look to the file `db-bootstrap-data/009-mixed-diaseases-symptoms.sql` for supported symptoms
+Please look to the file [db-bootstrap-data/009-mixed-diaseases-symptoms.sql](db-bootstrap-data/009-mixed-diaseases-symptoms.sql) for supported symptoms
 3. When you finish, you have to send one of the next phrases:
 ```
 I have __done__.
@@ -63,7 +63,7 @@ I want this girl.
 Suppose you got this girl soon.
 I am not sure...
 Why not?
-I do not agree with that!
+I am not agree with that!
 Are you saying NO just to be negative?
 I was so depressed last night...
 Why do you tell me you were so depressed now?
@@ -75,6 +75,6 @@ Ok, see you next time.
 
 # NOTE!
 
-Be __patient__ and do not expect very cool AI!
+Be __patient__ and __do not__ expect very cool AI!
 
 
