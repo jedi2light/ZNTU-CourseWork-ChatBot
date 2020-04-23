@@ -13,5 +13,7 @@ for sql in $(find db-bootstrap-data/ -name *.sql | sort); do
     sqlite3 "$APPLICATION_DATABASE" < "$sql"
 done
 
+echo "Copying bootstrapped database: $APPLICATION_DATABASE"; cp "$APPLICATION_DATABASE" .
+
 exit $?
 
