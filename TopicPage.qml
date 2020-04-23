@@ -28,7 +28,12 @@ Page {
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.implicitHeight
             leftPadding: avatar.implicitWidth + 32
-            onClicked: root.StackView.view.push("qrc:/ConversationPage.qml", { inConversationWith: model.name })
+            onClicked:
+                root.StackView.view.push(
+                    "qrc:/ConversationPage.qml", {
+                        inConversationWith: model.name,
+                        topicId: model.id
+                    })
 
             Image {
                 id: avatar

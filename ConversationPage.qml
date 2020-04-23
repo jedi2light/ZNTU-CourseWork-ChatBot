@@ -8,7 +8,7 @@ Page {
     id: root
 
     property string inConversationWith
-    property string conversationIconName
+    property string topicId
 
     header: ToolBar {
         ToolButton {
@@ -54,9 +54,6 @@ Page {
                     anchors.right: sentByMe ? parent.right : undefined
 
                     Image {
-                        onSourceChanged: {
-                            conversationIconName = model.icon
-                        }
                         id: avatar
                         source: !sentByMe ? "qrc:/resources/public/png/" + model.icon : ""
                     }
@@ -100,12 +97,6 @@ Page {
                     Layout.fillWidth: true
                     placeholderText: qsTr("Compose message")
                     wrapMode: TextArea.Wrap
-                    Keys.onPressed: {
-                        if (event.key === Qt.Key_Enter) {
-                            listView.model.sendMessage(inConversationWith, messageField.text, conversationIconName);
-                            messageField.text = "";
-                        }
-                    }
                 }
 
                 Button {
@@ -113,7 +104,7 @@ Page {
                     text: qsTr("Send")
                     enabled: messageField.length > 0
                     onClicked: {
-                        listView.model.sendMessage(inConversationWith, messageField.text, conversationIconName);
+                        listView.model.sendMessage(inConversationWith, topicId, messageField.text);
                         messageField.text = "";
                     }
                 }

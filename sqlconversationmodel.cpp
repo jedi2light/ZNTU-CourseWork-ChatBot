@@ -51,30 +51,21 @@ QHash<int, QByteArray> SqlConversationModel::roleNames() const {
     return names;
 }
 
-static int getIconId(QString iconName) {
-    QSqlQuery query("SELECT id FROM TopicIcon WHERE icon = '" + iconName + "'");
-    query.exec();
-    query.first();
-    return query.value(0).toInt();
-}
-
-void SqlConversationModel::sendMessage(const QString &recipient, const QString &message, const QString &iconName) {
+void SqlConversationModel::sendMessage(const QString &recipient, const QString &topicId, const QString &message) {
     // Set current recipient and message to AnswerManager object
 
     answerManager.setRecipient(recipient);
     answerManager.setMessage(message);
 
-    // Retrieve real icon id from TopicIcon because of QtSqlRelationTableModel behaivour
-    // So first we must call select() on related model, and then query().value("id")
-    // And provide it to new record then
-    // relationModel(5)->select();
+    // topicId value always equals to iconId, so we can use it
+    // instead of getting real iconId for converstaion SQL model
 
     QSqlRecord sentMessageRecord = record();
     sentMessageRecord.setValue("author", "Me");
     sentMessageRecord.setValue("recipient", recipient);
     sentMessageRecord.setValue("timestamp", QDateTime::currentDateTime().toString(Qt::ISODate));
     sentMessageRecord.setValue("message", message);
-    sentMessageRecord.setValue("icon", getIconId(iconName));
+    sentMessageRecord.setValue("icon", topicId);
 
     if (!insertRecord(rowCount(), sentMessageRecord)) {
         qWarning() << "Failed to register sent message: " << lastError().text();
@@ -86,7 +77,7 @@ void SqlConversationModel::sendMessage(const QString &recipient, const QString &
     retrievedMessageRecord.setValue("recipient", "Me");
     retrievedMessageRecord.setValue("timestamp", QDateTime::currentDateTime().toString(Qt::ISODate));
     retrievedMessageRecord.setValue("message", answerManager.appropriateMessage());
-    retrievedMessageRecord.setValue("icon", getIconId(iconName));
+    retrievedMessageRecord.setValue("icon", topicId);
 
     if (!insertRecord(rowCount(), retrievedMessageRecord)) {
         qWarning() << "Failed to register retrieved message:" << lastError().text();

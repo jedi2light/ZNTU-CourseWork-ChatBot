@@ -33,7 +33,7 @@ QString AnswerManager::whenLiveConsultationWithDoctor() {
 QString AnswerManager::appropriateMessage() {
     if (this->recipient == "Medicines Order") {
         return whenMedicinesOrder();
-    } else if (this->recipient == "Guess your diasease") {
+    } else if (this->recipient == "Guess Your Diasease") {
         return whenGuessYourDiasease();
     } else if (this->recipient == "Live Consultation with Doctor") {
         return whenLiveConsultationWithDoctor();
