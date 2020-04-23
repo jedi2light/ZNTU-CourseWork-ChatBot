@@ -27,12 +27,12 @@ __Finished__.
 __Thank__ you!
 ```
 
-# Gues Your Diasease
+# Guess Your Diasease
 1. First you have to start a dialog with one of the following phrases:
 ```
 __Hello__!
 Let`s __start__!
-I`ve got __sick__...
+Got __sick__...
 ```
 2. Next you have to send a symptom:
 Please take a look at [db-bootstrap-data/009-mixed-diaseases-symptoms.sql](db-bootstrap-data/009-mixed-diaseases-symptoms.sql) for supported symptoms
