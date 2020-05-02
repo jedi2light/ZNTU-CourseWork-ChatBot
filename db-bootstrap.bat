@@ -1,4 +1,4 @@
-@echo on
+@echo off
 
 rem Set environment
 set APPLICATION_DATAPATH="%APPDATA%\ChatBot"
