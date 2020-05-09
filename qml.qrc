@@ -6,5 +6,6 @@
         <file>resources/public/png/medicines.png</file>
         <file>resources/public/png/doctor.png</file>
         <file>resources/public/png/diasease.png</file>
+        <file>resources/public/sample-usage.html</file>
     </qresource>
 </RCC>
