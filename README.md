@@ -25,4 +25,11 @@ Take a look at [Sample Usage](SAMPLE_USAGE.md).
 # Demo
 Go through this link: https://youtu.be/R-HvUBbMWQ4
 
+# Special Notice for ZNTU
+
+It's a beautiful day outside.
+Birds are singing, flowers are blooming...
+On days like these, kids like you...
+S h o u l d  b e  b u r n i n g   i n   H E L L  .
+
 # TODO: fill with other improtant information ...
